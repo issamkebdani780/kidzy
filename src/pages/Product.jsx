@@ -6,7 +6,7 @@ const Product = () => {
   const steps = [
     { icon: Upload, title: "1. رفع الصورة", desc: "قم برفع صورة واضحة لطفلك من خلال موقعنا." },
     { icon: Cpu, title: "2. اختيار المهنة", desc: "اختر مهنة المستقبل (طبيب، مهندس، رائد فضاء...)." },
-    { icon: Cpu, title: "3. سحر الذكاء الاصطناعي", desc: "نظامنا يصنع شخصية 3D تشبه طفلك تماماً." },
+    { icon: Cpu, title: "3.  الذكاء الاصطناعي", desc: "نظامنا يصنع شخصية 3D تشبه طفلك تماماً." },
     { icon: CheckSquare, title: "4. تأكيد الشخصية", desc: "سنرسل لك الشخصية لتأكيدها قبل إكمال العمل." },
     { icon: BookOpen, title: "5. تأليف القصة", desc: "نكتب قصة ملهمة تتناسب مع المهنة المختارة." },
     { icon: Printer, title: "6. الطباعة", desc: "تتم طباعة الكتاب بجودة عالية وألوان زاهية." },
@@ -14,13 +14,23 @@ const Product = () => {
   ];
 
   return (
-    <div className="pt-20">
+    <div className="pt-20 bg-primary-50">
       {/* Header */}
-      <section className="bg-primary-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative py-24 overflow-hidden">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-50 to-white -z-10"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-200/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-200/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <AnimatedSection>
-            <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">كيف نصنع سحر Kidzy؟</h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <span className="inline-block py-1.5 px-4 rounded-full bg-primary-100 text-primary-700 text-sm font-bold mb-6 border border-primary-200 shadow-sm">
+              ✨ رحلة الإبداع
+            </span>
+            <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-slate-900">
+              كيف نصنع <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-purple-600">سحر Kidzy؟</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
               رحلة ممتعة تبدأ بصورة بسيطة وتنتهي بكتاب سحري يغير حياة طفلك.
             </p>
           </AnimatedSection>
@@ -59,73 +69,110 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-24 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-black mb-4">اختر الباقة المناسبة لك</h2>
-            <p className="text-lg text-slate-300 max-w-2xl mx-auto">أسعار مدروسة تناسب الجميع مع توفير خدمة الدفع عند الاستلام في الجزائر</p>
+      {/* Order Form Section */}
+      <section className="py-20 bg-primary-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-slate-100">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl font-black text-slate-900 mb-4">اطلب قصتك الآن</h2>
+                <p className="text-slate-600">املأ البيانات التالية لنبدأ في صنع سحر طفلك</p>
+              </div>
+
+              <form className="space-y-6" dir="rtl" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Kid's Name */}
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="kidName">
+                      اسم الطفل
+                    </label>
+                    <input
+                      type="text"
+                      id="kidName"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
+                      placeholder="أدخل اسم الطفل"
+                      required
+                    />
+                  </div>
+
+                  {/* Phone Number */}
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-2" htmlFor="phone">
+                      رقم الهاتف
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-right"
+                      placeholder="أدخل رقم الهاتف"
+                      required
+                      dir="ltr"
+                    />
+                  </div>
+                </div>
+
+                {/* Story Type */}
+                <div>
+                  <fieldset>
+                    <legend className="block text-sm font-bold text-slate-700 mb-4">نوع القصة (المهنة المستقبلية)</legend>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                      {[
+                        { id: 'doctor', label: 'طبيب', icon: '👨‍⚕️' },
+                        { id: 'engineer', label: 'مهندس', icon: '👷' },
+                        { id: 'astronaut', label: 'رائد فضاء', icon: '👨‍🚀' },
+                        { id: 'scientist', label: 'عالم', icon: '👨‍🔬' },
+                        { id: 'police', label: 'شرطي', icon: '👮' },
+                        { id: 'teacher', label: 'معلم', icon: '👨‍🏫' },
+                        { id: 'artist', label: 'فنان', icon: '🎨' },
+                        { id: 'other', label: 'أخرى', icon: '✨' },
+                      ].map(prof => (
+                        <label key={prof.id} className="relative flex flex-col items-center justify-center p-4 bg-white border-2 border-slate-100 rounded-2xl cursor-pointer hover:border-primary-300 hover:bg-primary-50/50 transition-all group shadow-sm">
+                          <input type="radio" name="storyType" value={prof.id} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer peer" required />
+                          <span className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{prof.icon}</span>
+                          <span className="text-sm font-bold text-slate-600 peer-checked:text-primary-700">{prof.label}</span>
+                          <div className="absolute inset-0 border-2 border-transparent rounded-2xl peer-checked:border-primary-600 peer-checked:bg-primary-50/30 pointer-events-none transition-all"></div>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                </div>
+
+                {/* Picture Upload */}
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-2">
+                    صورة الطفل
+                  </label>
+                  <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl hover:border-primary-500 transition-colors bg-slate-50 cursor-pointer relative">
+                    <input id="file-upload" name="file-upload" type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" required />
+                    <div className="space-y-1 text-center">
+                      <Upload className="mx-auto h-12 w-12 text-slate-400" />
+                      <div className="flex text-sm text-slate-600 justify-center">
+                        <span className="relative font-medium text-primary-600 hover:text-primary-500 px-2">
+                          اختر صورة
+                        </span>
+                        <p className="pl-1">أو اسحب وأفلت هنا</p>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    className="w-full flex justify-center items-center gap-2 py-4 px-8 border border-transparent rounded-xl shadow-sm text-lg font-bold text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all transform hover:-translate-y-1"
+                  >
+                    اطلب الآن - 2500 د.ج
+                    <CheckCircle2 className="w-5 h-5" />
+                  </button>
+                </div>
+              </form>
+            </div>
           </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Basic */}
-            <AnimatedSection delay={0.1}>
-              <div className="bg-slate-800 rounded-3xl p-8 border border-slate-700 hover:border-primary-500 transition-all flex flex-col h-full">
-                <h3 className="text-2xl font-bold mb-2">النسخة الرقمية</h3>
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-4xl font-black">1500</span>
-                  <span className="text-slate-400">د.ج</span>
-                </div>
-                <ul className="space-y-4 mb-8 flex-grow">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-primary-500" /> قصة بصيغة PDF</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-primary-500" /> 10 صفحات ملونة</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-primary-500" /> تسليم في 24 ساعة</li>
-                </ul>
-                <button className="w-full py-4 rounded-xl font-bold bg-slate-700 text-white hover:bg-slate-600 transition-colors">اطلب الآن</button>
-              </div>
-            </AnimatedSection>
-
-            {/* Premium / Printed */}
-            <AnimatedSection delay={0.2}>
-              <div className="bg-gradient-to-b from-primary-600 to-primary-800 rounded-3xl p-8 border border-primary-400 shadow-2xl shadow-primary-900/50 transform md:-translate-y-4 flex flex-col h-full relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-accent text-slate-900 font-bold px-4 py-1 rounded-full text-sm">
-                  الأكثر مبيعاً
-                </div>
-                <h3 className="text-2xl font-bold mb-2">النسخة المطبوعة</h3>
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-4xl font-black">3500</span>
-                  <span className="text-primary-200">د.ج</span>
-                </div>
-                <ul className="space-y-4 mb-8 flex-grow">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-accent" /> كتاب مطبوع بجودة عالية (غلاف صلب)</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-accent" /> نسخة رقمية مجانية</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-accent" /> 15 صفحة ملونة</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-accent" /> الدفع عند الاستلام</li>
-                </ul>
-                <button className="w-full py-4 rounded-xl font-bold bg-white text-primary-700 hover:bg-slate-100 transition-colors shadow-lg">اطلب الآن</button>
-              </div>
-            </AnimatedSection>
-
-            {/* Deluxe */}
-            <AnimatedSection delay={0.3}>
-              <div className="bg-slate-800 rounded-3xl p-8 border border-slate-700 hover:border-secondary-500 transition-all flex flex-col h-full">
-                <h3 className="text-2xl font-bold mb-2">الباقة الفاخرة</h3>
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span className="text-4xl font-black">4900</span>
-                  <span className="text-slate-400">د.ج</span>
-                </div>
-                <ul className="space-y-4 mb-8 flex-grow">
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary-500" /> كتاب مطبوع فاخر</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary-500" /> بوستر كبير للشخصية</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary-500" /> صندوق هدايا مميز</li>
-                  <li className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-secondary-500" /> توصيل مجاني</li>
-                </ul>
-                <button className="w-full py-4 rounded-xl font-bold bg-slate-700 text-white hover:bg-slate-600 transition-colors">اطلب الآن</button>
-              </div>
-            </AnimatedSection>
-          </div>
         </div>
       </section>
+
     </div>
   );
 };

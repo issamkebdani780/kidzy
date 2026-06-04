@@ -40,9 +40,9 @@ const Contact = () => {
                     <MessageSquare className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-1">واتساب</h3>
-                    <p className="text-primary-100">تواصل معنا مباشرة عبر واتساب</p>
-                    <p className="font-medium text-lg mt-1" dir="ltr">+213 555 12 34 56</p>
+                    <h3 className="font-bold text-lg mb-1">رقم الهاتف </h3>
+                    <p className="text-primary-100">تواصل معنا مباشرة عبر رقم الهاتف أو الواتساب</p>
+                    <p className="font-medium text-lg mt-1" >0780392055 </p>
                   </div>
                 </div>
 
@@ -52,7 +52,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-1">التوصيل</h3>
-                    <p className="text-primary-100">نوفر خدمة التوصيل لجميع ولايات الجزائر الـ 58.</p>
+                    <p className="text-primary-100">نوفر خدمة التوصيل لجميع ولايات الجزائر الـ 69.</p>
                   </div>
                 </div>
 
@@ -62,7 +62,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg mb-1">خدمة العملاء</h3>
-                    <p className="text-primary-100">من الأحد إلى الخميس: 9:00 صباحاً - 5:00 مساءً</p>
+                    <p className="text-primary-100">كل أيام الأسبوع 24/24 ساعة </p>
                   </div>
                 </div>
               </div>

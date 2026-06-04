@@ -177,7 +177,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <AnimatedSection className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">ماذا يقول الآباء عن Kidzy؟</h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">تجارب حقيقية لآباء رأوا السعادة في عيون أطفالهم</p>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">تجارب حقيقية لآباء رأوا السعادة في أطفالهم</p>
           </AnimatedSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

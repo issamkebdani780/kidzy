@@ -35,7 +35,7 @@ const Home = () => {
                 </button>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -43,12 +43,12 @@ const Home = () => {
               className="relative"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-primary-400 to-secondary-400 rounded-3xl transform rotate-3 scale-105 opacity-20 blur-xl"></div>
-              <img 
-                src="/hero.png" 
-                alt="طفل يتحول إلى بطل قصة باستخدام الذكاء الاصطناعي" 
+              <img
+                src="/hero.png"
+                alt="طفل يتحول إلى بطل قصة باستخدام الذكاء الاصطناعي"
                 className="relative z-10 w-full h-auto rounded-3xl shadow-2xl border-4 border-white object-cover aspect-[4/3]"
               />
-              <motion.div 
+              <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
                 className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl flex items-center gap-3 z-20"
@@ -126,11 +126,11 @@ const Home = () => {
                 </Link>
               </div>
             </AnimatedSection>
-            
+
             <AnimatedSection delay={0.2} className="grid grid-cols-2 gap-4">
-               {/* Decorative blocks to replace images for now, can be actual images later */}
-               <div className="bg-gradient-to-br from-blue-200 to-blue-400 rounded-3xl h-64 shadow-lg transform translate-y-8"></div>
-               <div className="bg-gradient-to-bl from-purple-200 to-purple-400 rounded-3xl h-64 shadow-lg"></div>
+              {/* Decorative blocks to replace images for now, can be actual images later */}
+              <div className="bg-gradient-to-br from-blue-200 to-blue-400 rounded-3xl h-64 shadow-lg transform translate-y-8"></div>
+              <div className="bg-gradient-to-bl from-purple-200 to-purple-400 rounded-3xl h-64 shadow-lg"></div>
             </AnimatedSection>
           </div>
         </div>
@@ -148,7 +148,7 @@ const Home = () => {
             <div className="bg-primary-50 rounded-[3rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
               <div className="absolute top-0 left-0 w-64 h-64 bg-secondary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-              
+
               <div className="w-full md:w-1/2 relative z-10">
                 <div className="bg-white p-6 md:p-8 rounded-3xl shadow-xl border-2 border-white">
                   <p className="text-2xl md:text-3xl text-slate-800 leading-relaxed font-bold mb-6 text-center md:text-right">
@@ -157,9 +157,9 @@ const Home = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2 relative z-10">
-                <img 
-                  src="/hero.png" 
-                  alt="مثال القصة" 
+                <img
+                  src="/hero.png"
+                  alt="مثال القصة"
                   className="rounded-3xl shadow-2xl object-cover w-full h-80"
                 />
               </div>
@@ -189,7 +189,7 @@ const Home = () => {
               <AnimatedSection key={idx} delay={idx * 0.1}>
                 <div className="bg-white p-8 rounded-[2.5rem] h-full shadow-xl shadow-secondary-100/50 border-2 border-white hover:border-secondary-200 transition-colors">
                   <div className="flex gap-1 mb-6">
-                    {[1,2,3,4,5].map(star => <Star key={star} className="w-5 h-5 text-accent fill-current" />)}
+                    {[1, 2, 3, 4, 5].map(star => <Star key={star} className="w-5 h-5 text-accent fill-current" />)}
                   </div>
                   <p className="text-lg text-slate-700 mb-8 font-medium leading-relaxed">"{review.text}"</p>
                   <div className="flex items-center gap-4 mt-auto">
@@ -216,7 +216,7 @@ const Home = () => {
               {/* Decorative background shapes inside the banner */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-2xl transform translate-x-1/2 -translate-y-1/2"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2"></div>
-              
+
               <div className="relative z-10">
                 <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">اصنع قصة طفلك اليوم</h2>
                 <p className="text-xl md:text-2xl text-primary-50 mb-10 font-medium max-w-2xl mx-auto">

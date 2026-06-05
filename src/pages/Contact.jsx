@@ -10,11 +10,32 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate form submission
-    alert('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
-    setFormData({ name: '', phone: '', message: '' });
+    setIsSubmitting(true);
+    
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        alert('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.');
+        setFormData({ name: '', phone: '', message: '' });
+      } else {
+        alert('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+      }
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      alert('تعذر الاتصال بالخادم.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -123,10 +144,11 @@ const Contact = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full bg-primary-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/30"
+                disabled={isSubmitting}
+                className={`w-full bg-primary-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-primary-600/30 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-primary-700'}`}
               >
                 <Send className="w-5 h-5" />
-                إرسال الرسالة
+                {isSubmitting ? 'جاري الإرسال...' : 'إرسال الرسالة'}
               </motion.button>
             </form>
           </div>

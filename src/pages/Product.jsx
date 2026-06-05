@@ -1,8 +1,37 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, Cpu, CheckSquare, BookOpen, Printer, Banknote, CheckCircle2 } from 'lucide-react';
 import AnimatedSection from '../components/AnimatedSection';
 
 const Product = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const formData = new FormData(e.target);
+    
+    try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const response = await fetch(`${apiUrl}/api/orders`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        alert('تم تقديم طلبك بنجاح!');
+        e.target.reset();
+      } else {
+        alert('حدث خطأ أثناء تقديم الطلب. يرجى المحاولة مرة أخرى.');
+      }
+    } catch (error) {
+      console.error('Error submitting order:', error);
+      alert('تعذر الاتصال بالخادم.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const steps = [
     { icon: Upload, title: "1. رفع الصورة", desc: "قم برفع صورة واضحة لطفلك من خلال موقعنا." },
     { icon: Cpu, title: "2. اختيار المهنة", desc: "اختر مهنة المستقبل (طبيب، مهندس، رائد فضاء...)." },
@@ -79,7 +108,7 @@ const Product = () => {
                 <p className="text-slate-600">املأ البيانات التالية لنبدأ في صنع سحر طفلك</p>
               </div>
 
-              <form className="space-y-6" dir="rtl" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" dir="rtl" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Kid's Name */}
                   <div>
@@ -89,6 +118,7 @@ const Product = () => {
                     <input
                       type="text"
                       id="kidName"
+                      name="kidName"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
                       placeholder="أدخل اسم الطفل"
                       required
@@ -103,6 +133,7 @@ const Product = () => {
                     <input
                       type="tel"
                       id="phone"
+                      name="phone"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-right"
                       placeholder="أدخل رقم الهاتف"
                       required
@@ -143,7 +174,7 @@ const Product = () => {
                     صورة الطفل
                   </label>
                   <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-300 border-dashed rounded-xl hover:border-primary-500 transition-colors bg-slate-50 cursor-pointer relative">
-                    <input id="file-upload" name="file-upload" type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" required />
+                    <input id="file-upload" name="image" type="file" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*" required />
                     <div className="space-y-1 text-center">
                       <Upload className="mx-auto h-12 w-12 text-slate-400" />
                       <div className="flex text-sm text-slate-600 justify-center">
@@ -161,10 +192,11 @@ const Product = () => {
                 <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full flex justify-center items-center gap-2 py-4 px-8 border border-transparent rounded-xl shadow-sm text-lg font-bold text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all transform hover:-translate-y-1"
+                    disabled={isSubmitting}
+                    className={`w-full flex justify-center items-center gap-2 py-4 px-8 border border-transparent rounded-xl shadow-sm text-lg font-bold text-white bg-primary-600 transition-all ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-primary-700 hover:-translate-y-1'}`}
                   >
-                    اطلب الآن - 2500 د.ج
-                    <CheckCircle2 className="w-5 h-5" />
+                    {isSubmitting ? 'جاري إرسال الطلب...' : 'اطلب الآن - 2500 د.ج'}
+                    {!isSubmitting && <CheckCircle2 className="w-5 h-5" />}
                   </button>
                 </div>
               </form>

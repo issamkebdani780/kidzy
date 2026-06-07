@@ -25,6 +25,23 @@ const STEPS = [
   { icon: Banknote,    title: '7. الاستلام والدفع',   desc: 'يصلك الكتاب حتى باب المنزل، والدفع عند الاستلام.' },
 ];
 
+// Compress image to max 1200px / JPEG 85% — prevents large phone photos from failing
+const compressImage = (file, maxPx = 1200, quality = 0.85) =>
+  new Promise((resolve) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      const scale = Math.min(1, maxPx / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width  = Math.round(img.width  * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: 'image/jpeg' })), 'image/jpeg', quality);
+    };
+    img.src = url;
+  });
+
 const Product = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // null | 'success' | 'error'
@@ -56,9 +73,9 @@ const Product = () => {
     const phone     = formData.get('phone');
     const storyType = formData.get('storyType');
     // Always read file directly from ref — the input may be visually hidden but is always in the DOM
-    const imageFile = fileInputRef.current?.files[0];
+    const rawFile = fileInputRef.current?.files[0];
 
-    if (!imageFile) {
+    if (!rawFile) {
       setSubmitStatus('error');
       setErrorMsg('يرجى اختيار صورة للطفل.');
       setIsSubmitting(false);
@@ -66,6 +83,8 @@ const Product = () => {
     }
 
     try {
+      // Compress before upload so large phone photos don't get rejected
+      const imageFile = await compressImage(rawFile);
       await submitOrder({ kidName, phone, storyType, imageFile });
       setSubmitStatus('success');
       formRef.current?.reset();

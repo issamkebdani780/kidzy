@@ -5,24 +5,24 @@ import AnimatedSection from '../components/AnimatedSection';
 import { submitOrder } from '../services/api';
 
 const PROFESSIONS = [
-  { id: 'doctor',    label: 'طبيب',       icon: '👨‍⚕️' },
-  { id: 'engineer',  label: 'مهندس',      icon: '👷' },
+  { id: 'doctor', label: 'طبيب', icon: '👨‍⚕️' },
+  { id: 'engineer', label: 'مهندس', icon: '👷' },
   { id: 'astronaut', label: 'رائد فضاء', icon: '👨‍🚀' },
-  { id: 'scientist', label: 'عالم',        icon: '👨‍🔬' },
-  { id: 'police',    label: 'شرطي',       icon: '👮' },
-  { id: 'teacher',   label: 'معلم',        icon: '👨‍🏫' },
-  { id: 'artist',    label: 'فنان',        icon: '🎨' },
-  { id: 'other',     label: 'أخرى',       icon: '✨' },
+  { id: 'scientist', label: 'عالم', icon: '👨‍🔬' },
+  { id: 'police', label: 'شرطي', icon: '👮' },
+  { id: 'teacher', label: 'معلم', icon: '👨‍🏫' },
+  { id: 'artist', label: 'فنان', icon: '🎨' },
+  { id: 'other', label: 'أخرى', icon: '✨' },
 ];
 
 const STEPS = [
-  { icon: Upload,      title: '1. رفع الصورة',        desc: 'قم برفع صورة واضحة لطفلك من خلال موقعنا.' },
-  { icon: Cpu,         title: '2. اختيار المهنة',     desc: 'اختر مهنة المستقبل (طبيب، مهندس، رائد فضاء...).' },
-  { icon: Cpu,         title: '3. الذكاء الاصطناعي',  desc: 'نظامنا يصنع شخصية 3D تشبه طفلك تماماً.' },
-  { icon: CheckSquare, title: '4. تأكيد الشخصية',    desc: 'سنرسل لك الشخصية لتأكيدها قبل إكمال العمل.' },
-  { icon: BookOpen,    title: '5. تأليف القصة',       desc: 'نكتب قصة ملهمة تتناسب مع المهنة المختارة.' },
-  { icon: Printer,     title: '6. الطباعة',            desc: 'تتم طباعة الكتاب بجودة عالية وألوان زاهية.' },
-  { icon: Banknote,    title: '7. الاستلام والدفع',   desc: 'يصلك الكتاب حتى باب المنزل، والدفع عند الاستلام.' },
+  { icon: Upload, title: '1. رفع الصورة', desc: 'قم برفع صورة واضحة لطفلك من خلال موقعنا.' },
+  { icon: Cpu, title: '2. اختيار المهنة', desc: 'اختر مهنة المستقبل (طبيب، مهندس، رائد فضاء...).' },
+  { icon: Cpu, title: '3. الذكاء الاصطناعي', desc: 'نظامنا يصنع شخصية 3D تشبه طفلك تماماً.' },
+  { icon: CheckSquare, title: '4. تأكيد الشخصية', desc: 'سنرسل لك الشخصية لتأكيدها قبل إكمال العمل.' },
+  { icon: BookOpen, title: '5. تأليف القصة', desc: 'نكتب قصة ملهمة تتناسب مع المهنة المختارة.' },
+  { icon: Printer, title: '6. الطباعة', desc: 'تتم طباعة الكتاب بجودة عالية وألوان زاهية.' },
+  { icon: Banknote, title: '7. الاستلام والدفع', desc: 'يصلك الكتاب حتى باب المنزل، والدفع عند الاستلام.' },
 ];
 
 // Compress image to max 1200px / JPEG 85% — prevents large phone photos from failing
@@ -34,7 +34,7 @@ const compressImage = (file, maxPx = 1200, quality = 0.85) =>
       URL.revokeObjectURL(url);
       const scale = Math.min(1, maxPx / Math.max(img.width, img.height));
       const canvas = document.createElement('canvas');
-      canvas.width  = Math.round(img.width  * scale);
+      canvas.width = Math.round(img.width * scale);
       canvas.height = Math.round(img.height * scale);
       canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
       canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: 'image/jpeg' })), 'image/jpeg', quality);
@@ -69,8 +69,8 @@ const Product = () => {
     setErrorMsg('');
 
     const formData = new FormData(e.target);
-    const kidName   = formData.get('kidName');
-    const phone     = formData.get('phone');
+    const kidName = formData.get('kidName');
+    const phone = formData.get('phone');
     const storyType = formData.get('storyType');
     // Always read file directly from ref — the input may be visually hidden but is always in the DOM
     const rawFile = fileInputRef.current?.files[0];
@@ -263,11 +263,10 @@ const Product = () => {
                             {PROFESSIONS.map((prof) => (
                               <label
                                 key={prof.id}
-                                className={`relative flex flex-col items-center justify-center p-4 bg-white border-2 rounded-2xl cursor-pointer transition-all group shadow-sm ${
-                                  selectedProf === prof.id
+                                className={`relative flex flex-col items-center justify-center p-4 bg-white border-2 rounded-2xl cursor-pointer transition-all group shadow-sm ${selectedProf === prof.id
                                     ? 'border-primary-600 bg-primary-50/30'
                                     : 'border-slate-100 hover:border-primary-300 hover:bg-primary-50/50'
-                                }`}
+                                  }`}
                               >
                                 <input
                                   type="radio"
@@ -366,11 +365,10 @@ const Product = () => {
                           disabled={isSubmitting}
                           whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
                           whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                          className={`w-full flex justify-center items-center gap-3 py-4 px-8 rounded-2xl text-lg font-bold text-white shadow-xl transition-all ${
-                            isSubmitting
+                          className={`w-full flex justify-center items-center gap-3 py-4 px-8 rounded-2xl text-lg font-bold text-white shadow-xl transition-all ${isSubmitting
                               ? 'bg-primary-400 cursor-not-allowed'
                               : 'bg-primary-600 hover:bg-primary-700 shadow-primary-500/30'
-                          }`}
+                            }`}
                         >
                           {isSubmitting ? (
                             <>

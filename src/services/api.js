@@ -4,7 +4,10 @@
  * Uses VITE_API_URL from .env (defaults to localhost:5000 for dev)
  */
 
-const BASE_URL = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : '');
+const rawApiUrl = import.meta.env.VITE_API_URL;
+const BASE_URL = (rawApiUrl && !rawApiUrl.includes('kidzy-backend-production.up.railway.app'))
+  ? rawApiUrl
+  : (import.meta.env.DEV ? 'http://localhost:5000' : '');
 
 // ─────────────────────────────────────────────
 // Submit an order (multipart/form-data with child photo)
